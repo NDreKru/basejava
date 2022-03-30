@@ -23,27 +23,25 @@ public class ArrayStorage {
                 return storage[i];
             }
         }
-        Resume nF = new Resume();
-        nF.uuid = "Not Found";
-        return nF;
+        return null;
     }
 
     void delete(String uuid) {
         for (int i = 0; i < size; i++) {
-            if (get(uuid).uuid.equals(storage[i].uuid)) {
-                System.arraycopy(storage, i + 1, storage, i, size - 1);
+            if (storage[i].uuid.equals(uuid)) {
+                System.arraycopy(storage, i + 1, storage, i, size - i - 1);
+                size--;
             }
         }
-        size--;
     }
 
     /**
      * @return array, contains only Resumes in storage (without null)
      */
     Resume[] getAll() {
-        Resume[] resultArr = new Resume[size];
-        System.arraycopy(storage, 0, resultArr, 0, size);
-        return resultArr;
+        Resume[] resumes = new Resume[size];
+        System.arraycopy(storage, 0, resumes, 0, size);
+        return resumes;
     }
 
     int size() {
